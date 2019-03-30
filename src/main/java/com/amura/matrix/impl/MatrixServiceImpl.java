@@ -41,15 +41,17 @@ public class MatrixServiceImpl implements MatrixService {
 					// check width first
 					width = findWidth(matrix, width, i, j);
 
-					// Check for height
-					height = findHeight(matrix, width, height, i, j);
+					// Check submatrix for each height width combination
+					for (int w = 1; w <= width; w++) {
+						int h = findHeight(matrix, w, height, i, j);
 
-					// check if current matrix is longest matrix
-					if (isCurrentMatrixLongest(width, height, longestWidth, longestHeight)) {
-						x = i;
-						y = j;
-						longestWidth = width;
-						longestHeight = height;
+						// check if current matrix is longest matrix
+						if (isCurrentMatrixLongest(w, h, longestWidth, longestHeight)) {
+							x = i;
+							y = j;
+							longestWidth = w;
+							longestHeight = h;
+						}
 					}
 
 				}
